@@ -4,19 +4,19 @@ import { DiaDisponibilidad } from "../../domain/disponibilidad/DiaDisponibilidad
 describe("US09 - Eliminar intervalo existente", () => {
   it("elimina un intervalo previamente agregado", () => {
 
-    /// -arrange
+    // -arrange
     const disponibilidad = new DiaDisponibilidad();
 
-    disponibilidad.crearIntervaloLaboral(
-      "1",
-      "09:00",
-      "12:00"
+    const intervalo = disponibilidad.crearIntervalo(
+      new Date("2026-06-01T09:00:00"),
+      new Date("2026-06-01T12:00:00"),
+      "LABORAL"
     );
 
-    /// -act
-    disponibilidad.eliminarIntervalo("1");
+    // -act
+    disponibilidad.eliminarIntervalo(intervalo.id);
 
-    /// -assert
+    // -assert
     expect(disponibilidad.obtenerIntervalos()).toHaveLength(0);
   });
 });

@@ -4,16 +4,15 @@ import { DiaDisponibilidad } from "../../domain/disponibilidad/DiaDisponibilidad
 describe("US06 - Rechazar intervalo inválido", () => {
   it("lanza error cuando inicio es mayor que fin", () => {
 
-    /// -arrange
+    // -arrange
     const disponibilidad = new DiaDisponibilidad();
 
-    /// -act+assert
+    const fechaH_inicio = new Date("2026-06-01T10:00:00");
+    const fechaH_fin = new Date("2026-06-01T09:00:00");
+
+    // -act+assert
     expect(() =>
-      disponibilidad.crearIntervaloLaboral(
-        "1",
-        "10:00",
-        "09:00"
-      )
-    ).toThrow();
+      disponibilidad.crearIntervalo(fechaH_inicio,fechaH_fin,"LABORAL")
+    ).toThrow("La hora de inicio debe ser menor que la hora de fin");
   });
 });

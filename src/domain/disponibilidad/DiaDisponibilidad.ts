@@ -1,16 +1,17 @@
-import { Intervalo } from "../intervalo/Intervalo";
+import { Intervalo, type TipoIntervalo } from "../intervalo/Intervalo";
 
 export class DiaDisponibilidad {
   private intervalos: Intervalo[] = [];
+  private siguienteId = 1;
 
   crearIntervaloVacio(intervalo: Intervalo): void {
     this.intervalos.push(intervalo);
   }
 
-  crearIntervaloLaboral(
-    id: string,
-    horaInicio: string,
-    horaFin: string
+  crearIntervalo(
+    horaInicio: Date,
+    horaFin: Date,
+    tipo: TipoIntervalo
   ): Intervalo {
 
     if (horaInicio >= horaFin) {
@@ -20,10 +21,10 @@ export class DiaDisponibilidad {
     }
 
     const intervalo = new Intervalo(
-      id,
+      String(this.siguienteId++),
       horaInicio,
       horaFin,
-      "LABORAL"
+      tipo
     );
 
     this.intervalos.push(intervalo);
